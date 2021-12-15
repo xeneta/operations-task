@@ -19,7 +19,7 @@ services:
 
   api:
     container_name: api
-    image: api_test:latest
+    image: api:latest
     depends_on:
       db:
         condition: service_healthy
