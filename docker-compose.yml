@@ -1,0 +1,27 @@
+version: "3.6"
+
+services:
+
+  db:
+    container_name: db
+    image: postgres:13.5
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    volumes:
+      - ./db/:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres"]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+
+  api:
+    container_name: api
+    image: api_test:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - 3000:3000
