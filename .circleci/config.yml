@@ -9,7 +9,7 @@ dev: &dev_only
 jobs:
 
   plan-apply:
-    working_directory: /tmp/project
+    working_directory: ~/operations-task/aws
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
