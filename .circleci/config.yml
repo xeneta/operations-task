@@ -76,6 +76,9 @@ jobs:
           command: |
             pip install awscli
             make ecr-api
+      - run:
+          name: update ecs service
+          command: aws ecs update-service --cluster dev-cluster --service app --force-new-deployment
       - persist_to_workspace:
           root: .
           paths:
