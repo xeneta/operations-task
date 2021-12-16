@@ -18,9 +18,8 @@ jobs:
       - run:
           name: terraform init & plan
           command: |
-            export TF_VAR_accountid=${ACCOUNTID}          
             terraform init -var TF_VAR_accountid=${ACCOUNTID}
-            terraform plan -out tfapply
+            terraform plan -out tfapply -var TF_VAR_accountid=${ACCOUNTID}
       - persist_to_workspace:
           root: .
           paths:
