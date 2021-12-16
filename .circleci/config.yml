@@ -18,8 +18,7 @@ jobs:
       - run:
           name: terraform init & plan
           command: |
-            terraform init -input=false
-            export TF_VAR_accountid=${ACCOUNTID}
+            terraform init -var TF_VAR_accountid=${ACCOUNTID}
             terraform plan -out tfapply
       - persist_to_workspace:
           root: .
@@ -48,8 +47,7 @@ jobs:
       - run:
           name: terraform create destroy plan
           command: |
-            export TF_VAR_accountid=${ACCOUNTID}        
-            terraform plan -destroy -out tfdestroy
+            terraform plan -destroy -out tfdestroy -var TF_VAR_accountid=${ACCOUNTID}
       - persist_to_workspace:
           root: .
           paths:
