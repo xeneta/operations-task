@@ -30,12 +30,6 @@ resource "aws_ecs_task_definition" "app" {
     }
   ])
 }
-
-
-resource "aws_cloudwatch_log_group" "db" {
-  name = "db"
-}
-
 resource "aws_cloudwatch_log_group" "api" {
   name = "api"
 }
