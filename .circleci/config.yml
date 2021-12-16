@@ -78,7 +78,7 @@ jobs:
             make ecr-api
       - run:
           name: update ecs service
-          command: aws ecs update-service --cluster dev-cluster --service app --force-new-deployment
+          command: aws ecs update-service --cluster dev-cluster --service app --force-new-deployment --region eu-west-2
       - persist_to_workspace:
           root: .
           paths:
@@ -114,3 +114,6 @@ workflows:
             - hold-destroy
       - build-and-push-image:
           <<: *dev_only          
+          type: approval
+          requires:
+            - plan-apply          
