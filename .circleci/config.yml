@@ -114,6 +114,5 @@ workflows:
             - hold-destroy
       - build-and-push-image:
           <<: *dev_only          
-          type: approval
           requires:
             - plan-apply          
