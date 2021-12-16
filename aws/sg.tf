@@ -46,3 +46,31 @@ resource "aws_security_group" "ecs-task-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+
+resource "aws_security_group" "rds-sg" {
+  name        = "rds-sg"
+  description = "rds sg"
+  vpc_id      = aws_vpc.main.id
+
+  ingress {
+    protocol        = "tcp"
+    from_port       = 3000
+    to_port         = 3000
+    security_groups = [aws_security_group.ecs-task-sg.id]
+  }
+
+    ingress {
+    protocol        = "tcp"
+    from_port       = 22
+    to_port         = 22
+    cidr_blocks = ["0.0.0.0/0"]    
+  }
+
+  egress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    security_groups = [aws_security_group.ecs-task-sg.id]
+  }
+}

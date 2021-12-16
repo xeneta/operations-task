@@ -16,29 +16,13 @@ resource "aws_ecs_task_definition" "app" {
           hostPort      = 3000
         }
       ],
+      "secrets" : [
+        { "name" : "HOST", "valueFrom" : "arn:aws:ssm:eu-west-2:${var.TF_VAR_accountid}:parameter/HOST" },
+      ],      
       "logConfiguration" : {
         "logDriver" : "awslogs",
         "options" : {
           "awslogs-group" : "api",
-          "awslogs-region" : "eu-west-2",
-          "awslogs-stream-prefix" : "ecs"
-        }
-      }
-    },
-    {
-      name      = "db"
-      image     = "${var.TF_VAR_accountid}.dkr.ecr.eu-west-2.amazonaws.com/db:latest"
-      essential = true
-      portMappings = [
-        {
-          containerPort = 5432
-          hostPort      = 5432
-        }
-      ],
-      "logConfiguration" : {
-        "logDriver" : "awslogs",
-        "options" : {
-          "awslogs-group" : "db",
           "awslogs-region" : "eu-west-2",
           "awslogs-stream-prefix" : "ecs"
         }
