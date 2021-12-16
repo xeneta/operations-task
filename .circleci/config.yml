@@ -63,6 +63,22 @@ jobs:
           name: terraform destroy
           command: |
             terraform apply -auto-approve tfdestroy
+    
+  build-and-push-image:
+    working_directory: ~/operations-task/
+    docker:
+      - image: python:3.7
+    steps:
+      - checkout:
+          path: ~/operations-task
+      - run:
+          name: docker build && push
+          command: |
+            make ecr
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
 
 workflows:
   version: 2
@@ -92,3 +108,5 @@ workflows:
           <<: *dev_only      
           requires:
             - hold-destroy
+      - build-and-push-image:
+          <<: *dev_only          
