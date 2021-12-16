@@ -69,11 +69,13 @@ jobs:
     docker:
       - image: python:3.7
     steps:
+      - setup_remote_docker    
       - checkout:
           path: ~/operations-task
       - run:
           name: docker build && push
           command: |
+            pip install awscli
             make ecr
       - persist_to_workspace:
           root: .
