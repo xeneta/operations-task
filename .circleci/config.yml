@@ -75,7 +75,7 @@ jobs:
           name: docker build && push
           command: |
             pip install awscli
-            make ecr
+            make ecr-api
       - persist_to_workspace:
           root: .
           paths:
