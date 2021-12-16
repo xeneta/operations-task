@@ -67,7 +67,7 @@ jobs:
   build-and-push-image:
     working_directory: ~/operations-task/
     docker:
-      - image: python:3.7
+      - image: python:3.10.0
     steps:
       - checkout
       - setup_remote_docker          
