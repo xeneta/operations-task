@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker build ../ -t api -f ../Dockerfile 
+docker build ../ -t api -f ../Dockerfile --build-arg HOST=$HOST
 
 aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin $ACCOUNTID.dkr.ecr.eu-west-2.amazonaws.com
 
