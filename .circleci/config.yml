@@ -1,0 +1,95 @@
+version: 2
+
+dev: &dev_only
+  filters:
+    branches:
+      only:
+        - automate_env    
+
+jobs:
+
+  plan-apply:
+    working_directory: /tmp/project
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - checkout
+      - run:
+          name: terraform init & plan
+          command: |
+            terraform init -input=false
+            export TF_VAR_accountid=${ACCOUNTID}
+            terraform plan -out tfapply
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+apply:
+  docker:
+    - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+  steps:
+    - attach_workspace:
+        at: .
+    - run:
+        name: terraform
+        command: |
+          terraform apply -auto-approve tfapply
+    - persist_to_workspace:
+        root: .
+        paths:
+          - .
+plan-destroy:
+  docker:
+    - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+  steps:
+    - attach_workspace:
+        at: .
+    - run:
+        name: terraform create destroy plan
+        command: |
+          export TF_VAR_accountid=${ACCOUNTID}        
+          terraform plan -destroy -out tfdestroy
+    - persist_to_workspace:
+        root: .
+        paths:
+          - .
+
+destroy:
+  docker:
+    - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+  steps:
+    - attach_workspace:
+        at: .
+    - run:
+        name: terraform destroy
+        command: |
+          terraform apply -auto-approve tfdestroy
+
+workflows:
+  version: 2
+  plan_approve_apply:
+    jobs:
+      - plan-apply:
+          <<: *dev_only
+      - hold-apply:
+          <<: *dev_only      
+          type: approval
+          requires:
+            - plan-apply
+      - apply:
+          <<: *dev_only      
+          requires:
+            - hold-apply
+      - plan-destroy:
+          <<: *dev_only      
+          requires:
+            - apply
+      - hold-destroy:
+          <<: *dev_only      
+          type: approval
+          requires:
+            - plan-destroy
+      - destroy:
+          <<: *dev_only      
+          requires:
+            - hold-destroy
