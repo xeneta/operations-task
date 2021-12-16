@@ -4,7 +4,7 @@ COPY rates rates
 
 WORKDIR /rates
 
-ARG HOST
+ENV HOST=$HOST
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y python3-pip
 RUN pip install -U gunicorn
