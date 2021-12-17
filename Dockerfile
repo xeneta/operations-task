@@ -1,9 +1,5 @@
 FROM python:3.7
 
-RUN groupadd -g 999 appuser && \
-    useradd -r -u 999 -g appuser appuser
-USER appuser
-
 COPY rates rates
 
 WORKDIR /rates
@@ -11,6 +7,10 @@ WORKDIR /rates
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y python3-pip
 RUN pip install -U gunicorn
 RUN pip install -Ur requirements.txt
+
+
+RUN useradd -m admin
+USER admin
 
 EXPOSE 3000
 
