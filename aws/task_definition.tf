@@ -18,6 +18,7 @@ resource "aws_ecs_task_definition" "app" {
       ],
       "secrets" : [
         { "name" : "HOST", "valueFrom" : "arn:aws:ssm:eu-west-2:${var.TF_VAR_accountid}:parameter/HOST" },
+        { "name" : "NAME", "valueFrom" : "arn:aws:ssm:eu-west-2:${var.TF_VAR_accountid}:parameter/NAME" },
       ],      
       "logConfiguration" : {
         "logDriver" : "awslogs",
