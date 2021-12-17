@@ -4,7 +4,7 @@ import os
 load_dotenv()
 
 DB = {
-    "name": "postgres",
+    "name": os.getenv('NAME'),
     "user": "postgres",
     "host": os.getenv('HOST'),
     "password": "password"
