@@ -5,7 +5,7 @@ resource "aws_db_instance" "db" {
   instance_class       = "db.t3.micro"
   name                 = "rates"
   username             = "postgres"
-  password             = "password"
+  password             = random_password.master_password.result
   identifier = "app-database"
   skip_final_snapshot  = true
   vpc_security_group_ids = [aws_security_group.rds-sg.id]
@@ -20,4 +20,9 @@ resource "aws_db_subnet_group" "db-subnet-group" {
   tags = {
     Name = "db subnet group"
   }
+}
+
+resource "random_password" "master_password" {
+  length  = 16
+  special = false
 }
