@@ -4,11 +4,11 @@ services:
 
   db:
     container_name: db
-    image: postgres:13.5
+    image: postgres:13.4
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgres
+      POSTGRES_DB: rates
     volumes:
       - ./db/:/docker-entrypoint-initdb.d
     healthcheck:
