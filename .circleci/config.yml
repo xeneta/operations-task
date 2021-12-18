@@ -112,7 +112,10 @@ workflows:
           <<: *dev_only      
           requires:
             - hold-destroy
+      - hold-build-and-push-image:
+          <<: *dev_only
+          type: approval           
       - build-and-push-image:
           <<: *dev_only          
           requires:
-            - plan-apply          
+            - hold-build-and-push-image
