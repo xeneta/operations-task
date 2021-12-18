@@ -29,7 +29,7 @@ You will be prompted to pass your AWS AccountID.
 After script finishes creating AWS setup, you will get a LoadBalanceer DNS that points to our API. If it returns 503, it means taskDefinition is still updating.
 
 ## CCI pipeline
-
+test
 There is also a CircleCI pipeline that triggers on push to `master` branch.
 **We need state bucket before that**
 Pipeline checks if there were any changes to underlaying infrastructure and it pushes API docker image to ECR and forces a new ECS deployment.
