@@ -22,6 +22,9 @@ services:
     image: api:latest
     environment:
       HOST: db
+      USER: postgres
+      NAME: rates
+      PASSWORD: password     
     depends_on:
       db:
         condition: service_healthy
