@@ -33,7 +33,7 @@ jobs:
       - run:
           name: terraform
           command: |
-            terraform apply -auto-approve tfapply -var TF_VAR_accountid=${ACCOUNTID} -var TF_VAR_s3_state_bucket=${STATE_BUCKET}
+            terraform apply -auto-approve tfapply
       - persist_to_workspace:
           root: .
           paths:
@@ -62,7 +62,7 @@ jobs:
       - run:
           name: terraform destroy
           command: |
-            terraform apply -auto-approve tfdestroy TF_VAR_accountid=${STATE_BUCKET} -var TF_VAR_s3_state_bucket=${STATE_BUCKET}
+            terraform apply -auto-approve tfdestroy
     
   build-and-push-image:
     working_directory: ~/operations-task/
