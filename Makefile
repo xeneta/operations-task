@@ -4,11 +4,8 @@ app:
 destroy:
 	docker-compose down
 
-test-locally:
-	curl "http://127.0.0.1:3000/rates?date_from=2021-01-01&date_to=2021-01-31&orig_code=CNGGZ&dest_code=EETLL"
-
 ecr-api:
-	cd scripts && ./ecr-api.sh
+	cd scripts && ./ecr-api.sh && aws ecs update-service --cluster dev-cluster --service app --force-new-deployment --region eu-west-2
 
 cloud-locally:
 	cd scripts && ./deploy-to-aws.sh

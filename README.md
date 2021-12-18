@@ -24,15 +24,15 @@ We are creating ECS service with one task definition for API that can access RDS
 ## Instructions
 
 If you have multiple AWS configs/profiles, run `export AWS_PROFILE=yourprofile`
+We also need already created state bucket for terraform state.
 Run `make cloud-locally`
-You will be prompted to pass your AWS AccountID.
+You will be prompted to pass your AWS AccountID and s3 name.
 After script finishes creating AWS setup, you will get a LoadBalanceer DNS that points to our API. If it returns 503, it means taskDefinition is still updating.
 
-## CCI pipeline
-test
-There is also a CircleCI pipeline that triggers on push to `master` branch.
-**We need state bucket before that**
-Pipeline checks if there were any changes to underlaying infrastructure and it pushes API docker image to ECR and forces a new ECS deployment.
+## Updating application
+
+We only need to build API image and deploy our ECS service.
+After you make changes to app code, run `make ecr-api`
 
 # Xeneta Operations Task
 
