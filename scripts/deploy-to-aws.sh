@@ -1,7 +1,8 @@
 #!/bin/bash
 export AWS_PAGER=""
 
-cd ../aws && terraform init && terraform apply -auto-approve
+cd ../aws/remote-state && terraform init && terraform apply -auto-approve
+cd ../ && terraform init && terraform apply -auto-approve
 terraform output -json | jq -r '@sh "export HOST=\(.db_host.value)\nexport PGPASSWORD=\(.rds_master_password.value)\nexport ACCOUNTID=\(.account_id.value)"' > env.sh && mv env.sh ../scripts
 cd ../scripts
 chmod 777 ./env.sh && source ./env.sh

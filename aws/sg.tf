@@ -27,7 +27,6 @@ resource "aws_security_group" "ecs-task-sg" {
     protocol        = "tcp"
     from_port       = 80
     to_port         = 80
-    cidr_blocks     = ["0.0.0.0/0"]
     security_groups = [aws_security_group.lb-sg.id]
   }
 
@@ -35,7 +34,7 @@ resource "aws_security_group" "ecs-task-sg" {
     protocol        = "tcp"
     from_port       = 3000
     to_port         = 3000
-    cidr_blocks     = ["0.0.0.0/0"]
+    security_groups = [aws_security_group.lb-sg.id]
   }
 
   egress {
@@ -56,7 +55,7 @@ resource "aws_security_group" "rds-sg" {
     protocol        = "-1"
     from_port       = 0
     to_port         = 0
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"] ### needs to be left open to let script dump rates.sql
   }
 
   egress {
