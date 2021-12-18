@@ -7,5 +7,5 @@ DB = {
     "name": os.getenv('NAME'),
     "user": "postgres",
     "host": os.getenv('HOST'),
-    "password": "password"
+    "password": os.getenv('PASSWORD')
 }
