@@ -1,7 +1,7 @@
 resource "aws_ssm_parameter" "db-host-name" {
   name = "HOST"
   type = "SecureString"
-  value = "app-database.cme2qbt5q5x2.eu-west-2.rds.amazonaws.com"
+  value = aws_db_instance.db.address
 }
 
 

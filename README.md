@@ -30,7 +30,7 @@ After script finishes creating AWS setup, you will get a LoadBalanceer DNS that 
 
 ## CCI pipeline
 
-There is also a CircleCI pipeline that triggers on push to `main` branch.
+There is also a CircleCI pipeline that triggers on push to `master` branch.
 **We need state bucket before that**
 Pipeline checks if there were any changes to underlaying infrastructure and it pushes API docker image to ECR and forces a new ECS deployment.
 
