@@ -45,3 +45,6 @@ resource "aws_iam_role_policy" "ssm" {
   }
   EOF
 }
+
+
+data "aws_caller_identity" "current" {}

@@ -21,5 +21,5 @@ resource "aws_ssm_parameter" "name" {
 resource "aws_ssm_parameter" "password" {
   name = "PASSWORD"
   type = "SecureString"
-  value = "password"
+  value = random_password.master_password.result
 }

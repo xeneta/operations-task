@@ -6,6 +6,10 @@ output "db_host" {
   value = aws_db_instance.db.address
 }
 
-output "rdsMasterPassword" {
+output "rds_master_password" {
     value = nonsensitive(random_password.master_password.result)
+}
+
+output "account_id" {
+  value = local.account_id
 }
