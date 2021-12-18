@@ -4,7 +4,7 @@ dev: &dev_only
   filters:
     branches:
       only:
-        - master
+        - automate_env
 
 jobs:
 
