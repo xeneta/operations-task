@@ -1,3 +1,39 @@
+# Running services locally
+
+## Requirements
+
+* docker && docker-compose
+
+## Instructions
+
+Run `make app` in a root directory
+
+
+# Deploying app to AWS from local machine
+
+## Requirements
+
+* [jq](https://stedolan.github.io/jq/)
+* AWS user that has permissions to create ECS, ECR, S3, IAM, SSM, RDS, and networking related resources (VPC, RouteTables, Subnets, SGs)
+
+## General overview
+
+For simplicity purposes we are deploying everything to London region (eu-west-2)
+We are creating ECS service with one task definition for API that can access RDS instance with postgres db that contains `db/rates.sql` dump.
+
+## Instructions
+
+If you have multiple AWS configs/profiles, run `export AWS_PROFILE=yourprofile`
+Run `make cloud-locally`
+You will be prompted to pass your AWS AccountID.
+After script finishes creating AWS setup, you will get a LoadBalanceer DNS that points to our API. If it returns 503, it means taskDefinition is still updating.
+
+## CCI pipeline
+
+There is also a CircleCI pipeline that triggers on push to `main` branch.
+**We need state bucket before that**
+Pipeline checks if there were any changes to underlaying infrastructure and it pushes API docker image to ECR and forces a new ECS deployment.
+
 # Xeneta Operations Task
 
 The task is two-fold:
