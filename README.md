@@ -26,7 +26,7 @@ Some general points:
 
 Provided are two simplified parts of the same application environment: A database dump and an API service. Your task is to automate setting up the development environment in a reliable and testable manner using "infrastructure as code" principles.
 
-The goal is to end up with a limited set of commands that would install the different environments and run them using containers. You can use any software that you find suitable for the task. The code should come with instructions on how to run it and deploy it to arbitrary targets; whether it is deployed locally, towards physical machines, or towards virtual nodes in the cloud.
+The goal is to end up with a limited set of commands that would install the different environments and run them using containers. You can use any software that you find suitable for the task. The code should come with instructions on how to run and deploy it.
 
 ### Running the database
 
