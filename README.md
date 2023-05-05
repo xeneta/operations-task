@@ -101,7 +101,12 @@ The output should be something like this:
 
 ## Case: Data ingestion pipeline
 
-In this section we are seeking high-level answers, use a maximum of couple of paragraphs to answer the questions.
+In this section we are seeking:
+
+* Your high-level considerations for architecture and possible solutions
+* Diagram and description of one concrete solution
+* Please elaborate on advantages and limitations of your chosen solution
+* Please document your assumptions about the problem
 
 ### Extended service
 
